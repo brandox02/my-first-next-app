@@ -16,16 +16,26 @@ export default () => {
         .split('/')
         .filter((x) => x !== '')
         .map((x) => `/${x}`)
-        .map((x) => {
-          return navRoutes.find((y) => {
-            if (x === y.href) return { label: y.lable, href: x };
-            else if (y.children) {
-              const founded = y.children.find((z) => z.href === x);
-              if (founded)
-                return { label: founded.label, href: `/${founded.href}` };
-              else console.log('Ruta no encontrada!');
-            }
-          });
+        .map((x, i, arr) => {
+          if (arr.length === 1) {
+            const founded = navRoutes.find((y) => x === y.href);
+            return { label: founded.label, href: founded.href };
+          } else {
+            return navRoutes.find((y) => {
+              if (x === y.href) return { label: y.lable, href: x };
+              else if (y.children) {
+                const founded = y.children.find((z) => z.href === x);
+                if (founded)
+                  return { label: founded.label, href: `/${founded.href}` };
+                else {
+                  return {
+                    label: 'Ruta no encontrada!',
+                    href: 'Ruta no encontrada!',
+                  };
+                }
+              }
+            });
+          }
         });
 
     console.log(result());
