@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import 'common/styles/globals.css';
 import SidenavBar from 'common/components/SideNavBar';
 import TopNavBar from 'common/components/TopNavBar';
 import Head from 'next/head';
